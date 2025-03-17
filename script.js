@@ -103,6 +103,20 @@ window.onload = function(){
         outputElement.innerHTML = a
     }
 
+    document.getElementById("btn_op_mars").onclick = function() { 
+        const P0 = 610; // Базовое давление на уровне "моря" Марса (Па)
+        const H = 0.00076; // Масштабная высота атмосферы Марса (м)
+
+        const pressure = P0 * Math.exp(-a * H)
+        console.log(pressure)
+        expressionResult = pressure.toFixed(2)
+        a = expressionResult.toString()
+        b = ''
+        selectedOperation = null
+    
+        outputElement.innerHTML = a
+    }
+
     document.getElementById("btn_op_backspace").onclick = function () {
         if (b !== '') {
             b = b.slice(0, -1);
@@ -129,7 +143,6 @@ window.onload = function(){
     let lastb = 0
     // кнопка расчёта результата
     document.getElementById("btn_op_equal").onclick = function() {
-        console.log(a, "|", b, lastOperation, "|", lastb)
         if (a === ''){
             return
         }
@@ -141,13 +154,13 @@ window.onload = function(){
 
         switch(selectedOperation) {
             case 'x':
-                expressionResult = (+a) * (+b);
+                expressionResult = a * b;
                 lastOperation = 'x'
                 break;
             case '+':
                 expressionResult = (+a) + (+b);
                 lastOperation = '+'
-                break;
+                break;  
             case '-':
                 expressionResult = (+a) - (+b);
                 lastOperation = '-'
