@@ -1,6 +1,7 @@
 import { ProductCardComponent } from "../../components/product-card/index.js";
 import { ProductPage } from "../product/index.js";
-
+import { ajax } from "../../modules/ajax.js";
+import { stockUrls } from "../../modules/stockUrls.js";
 
 export class MainPage {
     constructor(parent) {
@@ -8,62 +9,9 @@ export class MainPage {
     }
 
     getData() {
-        return [
-            {
-                id: 1,
-                src: "../../static/img/1.png",
-                title: "League of Legends",
-                text: "150тыс. зрителей"
-            },
-            {
-                id: 2,
-                src: "../../static/img/2.png",
-                title: "Dota 2",
-                text: "150тыс. зрителей"
-            },
-            {
-                id: 3,
-                src: "../../static/img/3.png",
-                title: "Counter Strike 2",
-                text: "150тыс. зрителей"
-            },
-            {
-                id: 4,
-                src: "../../static/img/4.png",
-                title: "GTA 5",
-                text: "150тыс. зрителей"
-            },
-            {
-                id: 5,
-                src: "../../static/img/5.png",
-                title: "Just Chatting",
-                text: "150тыс. зрителей"
-            },
-            {
-                id: 6,
-                src: "../../static/img/6.png",
-                title: "Warzone",
-                text: "150тыс. зрителей"
-            },
-            {
-                id: 7,
-                src: "../../static/img/7.png",
-                title: "Valorant",
-                text: "150тыс. зрителей"
-            },
-            {
-                id: 8,
-                src: "../../static/img/8.png",
-                title: "Expedition 33",
-                text: "150тыс. зрителей"
-            },
-            {
-                id: 9,
-                src: "../../static/img/8.png",
-                title: "Expedition 33",
-                text: "150тыс. зрителей"
-            },
-        ]
+        ajax.get(stockUrls.getStocks(), (data) => {
+            this.renderData(data);
+        })
     }
 
     get pageRoot() {
@@ -101,25 +49,22 @@ export class MainPage {
         )
     }
 
-    clickCard(id) {
-        // Обновляем URL с помощью history.pushState
-        const newUrl = `${window.location.origin}/product?id=${id}`;
-        window.history.pushState({ path: newUrl }, '', newUrl);
+    clickCard(cardId) {
+        const productPage = new ProductPage(this.parent, cardId)
+        productPage.render()
+    }
 
-        // Переход на страницу продукта
-        const productPage = new ProductPage(this.parent, id);
-        productPage.render();
+    renderData(items) {
+        items.forEach((item) => {
+            const productCard = new ProductCardComponent(this.pageRoot)
+            productCard.render(item, this.clickCard.bind(this))
+        })
     }
 
     render() {
         this.parent.innerHTML = ''
-        const html = this.getHTML()
-        this.parent.insertAdjacentHTML('beforeend', html)
-        const data = this.getData()
-        data.forEach((item) => {
-            const productCard = new ProductCardComponent(this.pageRoot)
-            productCard.render(item, this.clickCard.bind(this))
-        })
+        this.parent.insertAdjacentHTML('beforeend', this.getHTML())
+        this.getData()
         const searchInput = document.getElementById('search-input');
         if (searchInput) {
             searchInput.addEventListener('input', (e) => {

@@ -1,3 +1,4 @@
+//Карточка товара на главной странице
 export class ProductCardComponent {
     constructor(parent) {
         this.parent = parent;
@@ -7,7 +8,7 @@ export class ProductCardComponent {
     getHTML(data) {
         return (
             `
-              <div class="col-md-3">
+             <div class="col-md-3">
                 <div class="card mx-auto custom-bg-main text-light" style="cursor: pointer; width: 193px; position: relative;" id="click-card-${data.id}" data-id="${data.id}">
                     <button class="delete-card" style="position: absolute; top: 5px; right: 5px; background: none; border: none; color: white; font-size: 18px;">&times;</button>
                     <img class="card-img-top mx-auto" src="${data.src}" alt="картинка" style="width: 193px; height: 258px;">

@@ -1,6 +1,9 @@
 import { ProductComponent } from "../../components/product/index.js";
 import { BackButtonComponent } from "../../components/back-button/index.js";
 import { MainPage } from "../main/index.js";
+import { ajax } from "../../modules/ajax.js";
+import { stockUrls } from "../../modules/stockUrls.js";
+
 
 export class ProductPage {
     constructor(parent, id) {
@@ -9,24 +12,9 @@ export class ProductPage {
     }
 
     getData() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get('id') || 1; // Если id не указан, используем значение по умолчанию
-        const titles = {
-            1: "League of Legends",
-            2: "Dota 2",
-            3: "Counter Strike 2",
-            4: "GTA 5",
-            5: "Just Chatting",
-            6: "Warzone",
-            7: "Valorant",
-            8: "Expedition 33"
-        };
-        return {
-            id: id,
-            src: `../../static/img/${id}.png`,
-            title: titles[id] || `${id}`,
-            text: "150тыс. зрителей"
-        }
+        ajax.get(stockUrls.getStockById(this.id), (data) => {
+            this.renderData(data);
+        })
     }
 
     get pageRoot() {
@@ -46,25 +34,21 @@ export class ProductPage {
         mainPage.render()
     }
 
-    render() {
-        this.parent.innerHTML = ''
-        const html = this.getHTML()
-        this.parent.insertAdjacentHTML('beforeend', html)
-
-        const data = this.getData()
-        const stock = new ProductComponent(this.pageRoot)
-        stock.render(data)
-
+    renderData(item) {
+        const product = new ProductComponent(this.pageRoot)
+        product.render(item)
+        // Добавляем заголовок с названием товара
         const titleElement = document.createElement('h1');
-        titleElement.textContent = data.title;
+        titleElement.textContent = item.title;
         titleElement.style.color = 'white';
         titleElement.style.textAlign = 'center';
         this.pageRoot.insertAdjacentElement('afterbegin', titleElement);
+    }
 
-        const pagination = document.querySelector('.pagination');
-        if (pagination) {
-            pagination.remove();
-        }
+    render() {
+        this.parent.innerHTML = ''
+        this.parent.insertAdjacentHTML('beforeend', this.getHTML())
+        this.getData()
     }
 
 }
