@@ -1,32 +1,56 @@
 [
-  {
-    "id": 1,
-    "src": "https://i.pinimg.com/originals/c9/ea/65/c9ea654eb3a7398b1f702c758c1c4206.jpg",
-    "title": "Акция 1",
-    "text": "Такой акции вы еще не видели 1"
-  },
-  {
-    "id": 2,
-    "src": "https://i.pinimg.com/originals/c9/ea/65/c9ea654eb3a7398b1f702c758c1c4206.jpg",
-    "title": "Акция 2",
-    "text": "Такой акции вы еще не видели 2"
-  },
-  {
-    "id": 3,
-    "src": "https://i.pinimg.com/originals/c9/ea/65/c9ea654eb3a7398b1f702c758c1c4206.jpg",
-    "title": "Акция 3",
-    "text": "Такой акции вы еще не видели 3"
-  },
-  {
-    "id": 4,
-    "src": "https://i.pinimg.com/originals/c9/ea/65/c9ea654eb3a7398b1f702c758c1c4206.jpg",
-    "title": "Акция 4",
-    "text": "Такой акции вы еще не видели 4"
-  },
-  {
-    "src": "https://i.pinimg.com/originals/c9/ea/65/c9ea654eb3a7398b1f702c758c1c4206.jpg",
-    "title": "Новая акция 2",
-    "text": "Такой акции вы еще не видели 1",
-    "id": 5
-  }
+    {
+        "id": 1,
+        "src": "static/img/1.png",
+        "title": "League of Legends",
+        "text": "150тыс. зрителей"
+    },
+    {
+        "id": 2,
+        "src": "static/img/2.png",
+        "title": "Dota 2",
+        "text": "150тыс. зрителей"
+    },
+    {
+        "id": 3,
+        "src": "static/img/3.png",
+        "title": "Counter Strike 2",
+        "text": "150тыс. зрителей"
+    },
+    {
+        "id": 4,
+        "src": "static/img/4.png",
+        "title": "GTA 5",
+        "text": "150тыс. зрителей"
+    },
+    {
+        "id": 5,
+        "src": "static/img/5.png",
+        "title": "Just Chatting",
+        "text": "150тыс. зрителей"
+    },
+    {
+        "id": 6,
+        "src": "static/img/6.png",
+        "title": "Warzone",
+        "text": "150тыс. зрителей"
+    },
+    {
+        "id": 7,
+        "src": "static/img/7.png",
+        "title": "Valorant",
+        "text": "150тыс. зрителей"
+    },
+    {
+        "id": 8,
+        "src": "static/img/8.png",
+        "title": "Expedition 33",
+        "text": "150тыс. зрителей"
+    },
+    {
+        "id": 9,
+        "src": "static/img/8.png",
+        "title": "Expedition 33",
+        "text": "150тыс. зрителей"
+    }
 ]
